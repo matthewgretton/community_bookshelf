@@ -1,0 +1,19 @@
+<h1>Sign up</h1>
+
+<%= form_with model: @account, url: "/signup" do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </p>
+  <p>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </p>
+  <p>
+    <%= form.label :mobile %>
+    <%= form.telephone_field :mobile %>
+  </p>
+  <p>
+    <%= form.submit "Create account" %>
+  </p>
+<% end %>

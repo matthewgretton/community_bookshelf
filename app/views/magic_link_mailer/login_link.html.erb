@@ -1,0 +1,7 @@
+<p>Hello <%= @account.name.presence || @account.email %>,</p>
+<p>
+  Here is your personal link to Community Bookshelf:<br>
+  <a href="<%= @url %>"><%= @url %></a>
+  <br>
+  If you didn’t request this, you can ignore this email.
+  </p>

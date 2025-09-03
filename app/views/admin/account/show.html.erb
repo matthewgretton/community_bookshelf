@@ -1,0 +1,14 @@
+<h2>Account</h2>
+<p>
+  <strong>Name:</strong> <%= @account.name %><br>
+  <strong>Email:</strong> <%= @account.email %><br>
+  <strong>Mobile:</strong> <%= @account.mobile %><br>
+  <strong>Login token version:</strong> <%= @account.login_token_version %>
+  </p>
+
+<h2>Your personal link</h2>
+<p>
+  <%= link_to @magic_url, @magic_url %>
+  </p>
+
+<%= button_to "Regenerate personal link", admin_regenerate_path(token: params[:token]), method: :post %>

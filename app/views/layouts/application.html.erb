@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Community Bookshelf" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="color-scheme" content="light dark">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <%= stylesheet_link_tag "overrides", media: "all" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <% if current_account %>
+      <nav>
+        <ul>
+          <li><%= link_to "Search", search_path(token: params[:token]), aria: { current: (current_page?(search_path) ? "page" : nil) } %></li>
+          <li><%= link_to "Register", register_path(token: params[:token]), aria: { current: (current_page?(register_path) ? "page" : nil) } %></li>
+          <li><%= link_to "Borrowing", borrowing_path(token: params[:token]), aria: { current: (current_page?(borrowing_path) ? "page" : nil) } %></li>
+          <li><%= link_to "Lending", lending_path(token: params[:token]), aria: { current: (current_page?(lending_path) ? "page" : nil) } %></li>
+          <li><%= link_to "Admin", admin_root_path(token: params[:token]), aria: { current: (current_page?(admin_root_path) ? "page" : nil) } %></li>
+        </ul>
+      </nav>
+    <% end %>
+
+    <main>
+      <% if notice %>
+        <p role="status"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p role="alert"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </main>
+    
+  </body>
+</html>
